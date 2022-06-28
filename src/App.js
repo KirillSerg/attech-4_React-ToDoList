@@ -1,23 +1,24 @@
-import logo from './logo.svg';
+import React,{useState} from 'react';
 import './App.css';
 
+import Form from './components/Form';
+import TaskList from './components/TaskList';
+
 function App() {
+  const [task, setTask] = useState([])
+console.log(task)
+  const handlerAddTask = (itemTask) => {
+    setTask(task.concat([{ text: itemTask, done: false, id: task.length, }])
+      .sort((a, b) => a.done - b.done))
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <h1>You must do this!!</h1>
       </header>
+      <Form setTask={handlerAddTask} />
+      <TaskList task={task} setTask={setTask}/>
     </div>
   );
 }
