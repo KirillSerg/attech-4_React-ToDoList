@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
-const Form = ({setTask}) => {
+const Form = ({setTask, setCountTask, countTask}) => {
     const [itemTask, setItemTask] = useState('')
 
     const submitSetTask = (e) => {
         setTask(itemTask)
         setItemTask('')
+        setCountTask({deletedTask: countTask.deletedTask, createdTask: countTask.createdTask + 1, updatedTask: countTask.updatedTask})
         e.preventDefault();
     }
 
