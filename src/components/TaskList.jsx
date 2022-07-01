@@ -8,7 +8,7 @@ const TaskList = ({task, setTask, setCountTask, countTask}) => {
         <div className="todo-container">
             <ul>{
                 task.map((todo) => 
-                    <TaskRow key={todo.id} text={todo.text} id={todo.id} task={task} setTask={setTask} done={todo.done} setCountTask={setCountTask} countTask={ countTask} />
+                    <TaskRow key={todo.id} text={todo.text} id={todo.id} task={task} setTask={setTask} isCompleted={todo.isCompleted} setCountTask={setCountTask} countTask={ countTask} />
             )}
             </ul>
         </div>

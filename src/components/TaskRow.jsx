@@ -1,10 +1,9 @@
 import React, {useState} from "react";
 
 
-const TaskRow = ({ text, id, task, setTask, done, setCountTask, countTask }) => {
+const TaskRow = ({ text, id, task, setTask, isCompleted, setCountTask, countTask }) => {
     const [redactOn, setRedactOn] = useState(true)
     const [redactTextTask, setRedactTextTask] = useState('')
-    const [completeOn, setCompleteOn] = useState(false)
     
     const deleteTaskRowHandler = () => {
         setCountTask({deletedTask: countTask.deletedTask + 1, createdTask: countTask.createdTask, updatedTask: countTask.updatedTask})
@@ -17,7 +16,7 @@ const TaskRow = ({ text, id, task, setTask, done, setCountTask, countTask }) => 
 
     const saveButtonHendler = () => {
         setRedactOn(!redactOn)
-        setTask(task.map(todo => (todo.id !== id) ? todo : { text: redactTextTask, done: todo.done, id: todo.id, }))
+        setTask(task.map(todo => (todo.id !== id) ? todo : { id: todo.id, text: redactTextTask, isCompleted: todo.isCompleted, createdAt: "123", }))
         setCountTask({deletedTask: countTask.deletedTask, createdTask: countTask.createdTask, updatedTask: countTask.updatedTask + 1})
     }
 
@@ -26,15 +25,14 @@ const TaskRow = ({ text, id, task, setTask, done, setCountTask, countTask }) => 
     }
 
     const complitItemTaskHandler = () => {
-        setCompleteOn(!completeOn)
-        setTask(task.map(todo => (todo.id !== id) ? todo : { text: todo.text, done: !completeOn, id: todo.id, })
-            .sort((a, b) => a.done - b.done))
+        setTask(task.map(todo => (todo.id !== id) ? todo : { id: todo.id, text: todo.text, isCompleted: !todo.isCompleted, createdAt: "123", })
+            .sort((a, b) => a.isCompleted - b.isCompleted))
     }
 
     return (
         <div className='wrap'>
-            <input type="checkbox" defaultChecked={done} onClick={complitItemTaskHandler} />
-            <input className={done ? "complete" : ""} type="text" disabled={redactOn} defaultValue={text} onChange={redactItemTaskHandler} />
+            <input type="checkbox" checked={isCompleted} onChange={complitItemTaskHandler} />
+            <input className={isCompleted ? "complete" : ""} type="text" disabled={redactOn} defaultValue={text} onChange={redactItemTaskHandler} />
             <button onClick={deleteTaskRowHandler}>del</button>
             <button disabled={!redactOn} onClick={redactButtonHendler}>redact</button>
             <button hidden={redactOn} onClick={saveButtonHendler}>save</button>

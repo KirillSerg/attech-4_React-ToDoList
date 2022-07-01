@@ -11,15 +11,16 @@ function App() {
 
   useEffect(() => {
     getLocal()
+    
   }, []);
 
   useEffect(() => {
     saveLocal()
   }, [task, countTask]);
-
+  
   const handlerAddTask = (itemTask) => {
-    setTask(task.concat([{ text: itemTask, done: false, id: Math.random() * 1000, }])
-      .sort((a, b) => a.done - b.done))
+    setTask(task.concat([{ id: Math.random() * 1000, text: itemTask, isCompleted: false, createdAt: "123", }])
+      .sort((a, b) => a.isCompleted - b.isCompleted))
   }
 
   const saveLocal = () => {
@@ -29,6 +30,7 @@ function App() {
 
   const getLocal = () => {
     if (localStorage.getItem("task") === null) {
+      getDataTask()
       localStorage.setItem("task", JSON.stringify([]));
     } else {
       let taskLocal = JSON.parse(localStorage.getItem("task"));
@@ -41,6 +43,12 @@ function App() {
       let counterLocal = JSON.parse(localStorage.getItem("countTask"));
       setCountTask(counterLocal)
     }
+  }
+
+  function getDataTask() {
+    return fetch('https://gist.githubusercontent.com/alexandrtovmach/0c8a29b734075864727228c559fe9f96/raw/c4e4133c9658af4c4b3474475273b23b4a70b4af/todo-task.json')
+      .then(response => response.json())
+      .then(x => setTask(x.sort((a, b) => a.isCompleted - b.isCompleted)))
   }
 
   return (
