@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 
+import StyledTodoItem from "./StyledTodoItem";
 
 const TaskRow = ({ text, id, task, setTask, isCompleted, setCountTask, countTask }) => {
     const [redactOn, setRedactOn] = useState(true)
@@ -16,7 +17,7 @@ const TaskRow = ({ text, id, task, setTask, isCompleted, setCountTask, countTask
 
     const saveButtonHendler = () => {
         setRedactOn(!redactOn)
-        setTask(task.map(todo => (todo.id !== id) ? todo : { id: todo.id, text: redactTextTask, isCompleted: todo.isCompleted, createdAt: "123", }))
+        setTask(task.map(todo => (todo.id !== id) ? todo : { id: todo.id, text: redactTextTask, isCompleted: todo.isCompleted, createdAt: todo.createdAt, }))
         setCountTask({deletedTask: countTask.deletedTask, createdTask: countTask.createdTask, updatedTask: countTask.updatedTask + 1})
     }
 
@@ -32,7 +33,7 @@ const TaskRow = ({ text, id, task, setTask, isCompleted, setCountTask, countTask
     return (
         <div className='wrap'>
             <input type="checkbox" checked={isCompleted} onChange={complitItemTaskHandler} />
-            <input className={isCompleted ? "complete" : ""} type="text" disabled={redactOn} defaultValue={text} onChange={redactItemTaskHandler} />
+            <StyledTodoItem className={isCompleted ? "complete" : ""} type="text" disabled={redactOn} defaultValue={text} onChange={redactItemTaskHandler} />
             <button onClick={deleteTaskRowHandler}>del</button>
             <button disabled={!redactOn} onClick={redactButtonHendler}>redact</button>
             <button hidden={redactOn} onClick={saveButtonHendler}>save</button>

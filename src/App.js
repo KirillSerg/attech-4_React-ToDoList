@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
 import Form from './components/Form';
@@ -17,9 +17,11 @@ function App() {
   useEffect(() => {
     saveLocal()
   }, [task, countTask]);
+
+  let date = new Date()
   
   const handlerAddTask = (itemTask) => {
-    setTask(task.concat([{ id: Math.random() * 1000, text: itemTask, isCompleted: false, createdAt: "123", }])
+    setTask(task.concat([{ id: Math.random() * 1000, text: itemTask, isCompleted: false, createdAt: date.toLocaleDateString('en-US'), }])
       .sort((a, b) => a.isCompleted - b.isCompleted))
   }
 
@@ -50,6 +52,8 @@ function App() {
       .then(response => response.json())
       .then(x => setTask(x.sort((a, b) => a.isCompleted - b.isCompleted)))
   }
+
+
 
   return (
     <div className="App">

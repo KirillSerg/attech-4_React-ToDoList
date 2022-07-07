@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import StyledInputTask from './StyledInputTask';
+
 
 const Form = ({setTask, setCountTask, countTask}) => {
     const [itemTask, setItemTask] = useState('')
@@ -16,7 +18,7 @@ const Form = ({setTask, setCountTask, countTask}) => {
 
     return (
         <form>
-            <input type="text" onChange={addHandler} placeholder="enter your ToDo" value={itemTask} />
+            <StyledInputTask type="text" onChange={addHandler} placeholder="enter your ToDo" value={itemTask} />
             <button type="submit" onClick={submitSetTask}> + </button>
         </form>
     )

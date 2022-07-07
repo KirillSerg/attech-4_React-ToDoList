@@ -1,3 +1,4 @@
+/*
 header, form {
     min-height: 20vh;
     display: flex;
@@ -21,10 +22,11 @@ header, form {
 
 .wrap {
     display: flex;
-}
+} 
 
 .complete {
     text-decoration: line-through;
     opacity: 0.5;
-    background-color: rgb(133, 247, 167);
+    background-color: rgb(7, 243, 77);
 }
+*/
