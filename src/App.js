@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
+import styles from './App.module.scss';
 
 import Form from './components/Form';
 import TaskList from './components/TaskList';
@@ -11,7 +11,6 @@ function App() {
 
   useEffect(() => {
     getLocal()
-    
   }, []);
 
   useEffect(() => {
@@ -56,13 +55,15 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div className={styles.app}>
       <header>
         <h1>You must do this!!</h1>
       </header>
-      <div className='counter'>Created Tasks: {countTask.createdTask}</div>
-      <div className='counter'>Updated Tasks: {countTask.updatedTask}</div>
-      <div className='counter'>Deleted Tasks: {countTask.deletedTask}</div>
+      <div className={styles.counters}>
+        <div>Created Tasks: {countTask.createdTask}</div>
+        <div>Updated Tasks: {countTask.updatedTask}</div>
+        <div>Deleted Tasks: {countTask.deletedTask}</div>
+      </div>
       <Form setTask={handlerAddTask} setCountTask={setCountTask} countTask={ countTask}/>
       <TaskList task={task} setTask={setTask} setCountTask={setCountTask} countTask={ countTask} />
     </div>

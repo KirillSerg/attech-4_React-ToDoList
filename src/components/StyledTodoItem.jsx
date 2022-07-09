@@ -5,14 +5,10 @@ import StyledInputTask from "./StyledInputTask";
 
 const StyledTask = styled(StyledInputTask)`
     margin: 0;
-    background-color: ${props => props.className === 'complete' ? 'rgb(7, 243, 77)' : 'yellow'};
-    color: ${props => props.className === 'complete' ? 'black' : 'blue'};
-    text-decoration: ${props => props.className === 'complete' ? 'line-through' : 'none'};
-    opacity: ${props => props.className === 'complete' ? '0.5' : 'none'};
-
-    // &:complete {
-    //     background-color: rgb(133, 247, 167);
-    // };
+    background-color: ${({isCompleted}) => isCompleted ? 'green' : 'yellow'};
+    color: ${({isCompleted}) => isCompleted ? 'black' : 'blue'};
+    text-decoration: ${({isCompleted}) => isCompleted ? 'line-through' : 'none'};
+    opacity: ${props => props.isCompleted ? '0.5' : 'none'};
 `
 
 const StyledTodoItem = (props) => {

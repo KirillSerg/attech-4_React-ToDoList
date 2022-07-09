@@ -33,7 +33,7 @@ const TaskRow = ({ text, id, task, setTask, isCompleted, setCountTask, countTask
     return (
         <div className='wrap'>
             <input type="checkbox" checked={isCompleted} onChange={complitItemTaskHandler} />
-            <StyledTodoItem className={isCompleted ? "complete" : ""} type="text" disabled={redactOn} defaultValue={text} onChange={redactItemTaskHandler} />
+            <StyledTodoItem isCompleted={isCompleted} type="text" disabled={redactOn} defaultValue={text} onChange={redactItemTaskHandler} />
             <button onClick={deleteTaskRowHandler}>del</button>
             <button disabled={!redactOn} onClick={redactButtonHendler}>redact</button>
             <button hidden={redactOn} onClick={saveButtonHendler}>save</button>

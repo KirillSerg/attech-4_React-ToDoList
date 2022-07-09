@@ -2,9 +2,9 @@ import React from "react";
 import styled from 'styled-components';
 
 const StyledInput = styled.input`
-    margin-left: 20px;
+    margin-left: 13px;
     color: blue;
-    background-color: rgb(195, 253, 255);
+    background-color: lightgray;
     border: 1px solid red;
     width: 40vw;
 
