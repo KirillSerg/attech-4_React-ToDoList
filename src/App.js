@@ -4,10 +4,9 @@ import styles from './App.module.scss';
 import Form from './components/Form';
 import TaskList from './components/TaskList';
 
-function App() {
+const App = () => {
   const [task, setTask] = useState([])
-  const [countTask, setCountTask] = useState({deletedTask: 0, createdTask: 0, updatedTask: 0})
-
+  const [countTask, setCountTask] = useState({ deletedTask: 0, createdTask: 0, updatedTask: 0 })
 
   useEffect(() => {
     getLocal()
@@ -18,9 +17,14 @@ function App() {
   }, [task, countTask]);
 
   let date = new Date()
+
+  const getRandomColor = () => {
+    const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16)
+    return randomColor
+  }
   
   const handlerAddTask = (itemTask) => {
-    setTask(task.concat([{ id: Math.random() * 1000, text: itemTask, isCompleted: false, createdAt: date.toLocaleDateString('en-US'), }])
+    setTask(task.concat([{ id: Math.random() * 1000, text: itemTask, isCompleted: false, color: getRandomColor(), createdAt: date.toLocaleDateString('en-US'), }])
       .sort((a, b) => a.isCompleted - b.isCompleted))
   }
 
@@ -49,10 +53,8 @@ function App() {
   function getDataTask() {
     return fetch('https://gist.githubusercontent.com/alexandrtovmach/0c8a29b734075864727228c559fe9f96/raw/c4e4133c9658af4c4b3474475273b23b4a70b4af/todo-task.json')
       .then(response => response.json())
-      .then(x => setTask(x.sort((a, b) => a.isCompleted - b.isCompleted)))
+      .then(json => setTask(json.map(todo => ({ ...todo, color: getRandomColor() })).sort((a, b) => a.isCompleted - b.isCompleted)))
   }
-
-
 
   return (
     <div className={styles.app}>
@@ -64,7 +66,7 @@ function App() {
         <div>Updated Tasks: {countTask.updatedTask}</div>
         <div>Deleted Tasks: {countTask.deletedTask}</div>
       </div>
-      <Form setTask={handlerAddTask} setCountTask={setCountTask} countTask={ countTask}/>
+      <Form handlerAddTask={handlerAddTask} setCountTask={setCountTask} countTask={ countTask}/>
       <TaskList task={task} setTask={setTask} setCountTask={setCountTask} countTask={ countTask} />
     </div>
   );

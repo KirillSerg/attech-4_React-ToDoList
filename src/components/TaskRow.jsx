@@ -2,7 +2,7 @@ import React, {useState} from "react";
 
 import StyledTodoItem from "./StyledTodoItem";
 
-const TaskRow = ({ text, id, task, setTask, isCompleted, setCountTask, countTask }) => {
+const TaskRow = ({ text, id, task, setTask, isCompleted, setCountTask, countTask,color }) => {
     const [redactOn, setRedactOn] = useState(true)
     const [redactTextTask, setRedactTextTask] = useState('')
     
@@ -17,7 +17,7 @@ const TaskRow = ({ text, id, task, setTask, isCompleted, setCountTask, countTask
 
     const saveButtonHendler = () => {
         setRedactOn(!redactOn)
-        setTask(task.map(todo => (todo.id !== id) ? todo : { id: todo.id, text: redactTextTask, isCompleted: todo.isCompleted, createdAt: todo.createdAt, }))
+        setTask(task.map(todo => (todo.id !== id) ? todo : { id: todo.id, text: redactTextTask, isCompleted: todo.isCompleted, createdAt: todo.createdAt, color: todo.color}))
         setCountTask({deletedTask: countTask.deletedTask, createdTask: countTask.createdTask, updatedTask: countTask.updatedTask + 1})
     }
 
@@ -26,16 +26,16 @@ const TaskRow = ({ text, id, task, setTask, isCompleted, setCountTask, countTask
     }
 
     const complitItemTaskHandler = () => {
-        setTask(task.map(todo => (todo.id !== id) ? todo : { id: todo.id, text: todo.text, isCompleted: !todo.isCompleted, createdAt: "123", })
+        setTask(task.map(todo => (todo.id !== id) ? todo : { id: todo.id, text: todo.text, isCompleted: !todo.isCompleted, createdAt: todo.createdAt, })
             .sort((a, b) => a.isCompleted - b.isCompleted))
     }
 
     return (
         <div className='wrap'>
             <input type="checkbox" checked={isCompleted} onChange={complitItemTaskHandler} />
-            <StyledTodoItem isCompleted={isCompleted} type="text" disabled={redactOn} defaultValue={text} onChange={redactItemTaskHandler} />
+            <StyledTodoItem isCompleted={isCompleted} color={ color} type="text" disabled={redactOn} defaultValue={text} onChange={redactItemTaskHandler} />
             <button onClick={deleteTaskRowHandler}>del</button>
-            <button disabled={!redactOn} onClick={redactButtonHendler}>redact</button>
+            <button hidden={!redactOn} onClick={redactButtonHendler}>redact</button>
             <button hidden={redactOn} onClick={saveButtonHendler}>save</button>
         </div>
     )
