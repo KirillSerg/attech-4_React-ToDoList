@@ -1,14 +1,18 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
+import { useDispatch } from 'react-redux';
 
 import StyledTodoItem from "./StyledTodoItem";
 
-const TaskRow = ({ text, id, task, setTask, isCompleted, setCountTask, countTask,color }) => {
+const TaskRow = ({ text, id, task, setTask, isCompleted, setCountTask, countTask, color }) => {
     const [redactOn, setRedactOn] = useState(true)
     const [redactTextTask, setRedactTextTask] = useState('')
     
+    const dispatch = useDispatch()
+
     const deleteTaskRowHandler = () => {
         setCountTask({deletedTask: countTask.deletedTask + 1, createdTask: countTask.createdTask, updatedTask: countTask.updatedTask})
-        setTask(task.filter(todo => todo.id !== id))
+        setTask(task.filter(todo => todo.id !== id));
+        dispatch({ type: "DELETE"})
     }
 
     const redactButtonHendler = () => {
@@ -18,7 +22,8 @@ const TaskRow = ({ text, id, task, setTask, isCompleted, setCountTask, countTask
     const saveButtonHendler = () => {
         setRedactOn(!redactOn)
         setTask(task.map(todo => (todo.id !== id) ? todo : { id: todo.id, text: redactTextTask, isCompleted: todo.isCompleted, createdAt: todo.createdAt, color: todo.color}))
-        setCountTask({deletedTask: countTask.deletedTask, createdTask: countTask.createdTask, updatedTask: countTask.updatedTask + 1})
+        setCountTask({ deletedTask: countTask.deletedTask, createdTask: countTask.createdTask, updatedTask: countTask.updatedTask + 1 });
+        dispatch({ type: "UPDATE"})
     }
 
     const redactItemTaskHandler = (e) => {
@@ -34,9 +39,9 @@ const TaskRow = ({ text, id, task, setTask, isCompleted, setCountTask, countTask
         <div className='wrap'>
             <input type="checkbox" checked={isCompleted} onChange={complitItemTaskHandler} />
             <StyledTodoItem isCompleted={isCompleted} color={ color} type="text" disabled={redactOn} defaultValue={text} onChange={redactItemTaskHandler} />
-            <button onClick={deleteTaskRowHandler}>del</button>
-            <button hidden={!redactOn} onClick={redactButtonHendler}>redact</button>
-            <button hidden={redactOn} onClick={saveButtonHendler}>save</button>
+            <button style={{ margin: "0 0 0 5px" }} onClick={deleteTaskRowHandler}>del</button>
+            <button style={{ margin: "0 0 0 5px" }} hidden={!redactOn} onClick={redactButtonHendler}>redact</button>
+            <button style={{ margin: "0 0 0 5px" }} hidden={redactOn} onClick={saveButtonHendler}>save</button>
         </div>
     )
 }

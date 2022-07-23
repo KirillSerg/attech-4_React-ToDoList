@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import countRaducer from './reducers/counter';
 
 // import { createGlobalStyle } from 'styled-components';
 
@@ -14,12 +17,16 @@ import reportWebVitals from './reportWebVitals';
 // }
 // `
 
+const store = createStore(countRaducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   //<React.StrictMode>
   // <>
   //   <Global/>
+  <Provider store={store}>
     <App />
+  </Provider>
   // </>
   //</React.StrictMode>
 );

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './App.module.scss';
 
 import Form from './components/Form';
@@ -7,6 +8,9 @@ import TaskList from './components/TaskList';
 const App = () => {
   const [task, setTask] = useState([])
   const [countTask, setCountTask] = useState({ deletedTask: 0, createdTask: 0, updatedTask: 0 })
+
+  const counter = useSelector(state => state)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     getLocal()
@@ -25,12 +29,14 @@ const App = () => {
   
   const handlerAddTask = (itemTask) => {
     setTask(task.concat([{ id: Math.random() * 1000, text: itemTask, isCompleted: false, color: getRandomColor(), createdAt: date.toLocaleDateString('en-US'), }])
-      .sort((a, b) => a.isCompleted - b.isCompleted))
+      .sort((a, b) => a.isCompleted - b.isCompleted));
+    dispatch({ type: "ADD"})
   }
 
   const saveLocal = () => {
     localStorage.setItem("task", JSON.stringify(task));
     localStorage.setItem("countTask", JSON.stringify(countTask));
+    localStorage.setItem("count", JSON.stringify(counter));
   }
 
   const getLocal = () => {
@@ -61,6 +67,11 @@ const App = () => {
       <header>
         <h1>You must do this!!</h1>
       </header>
+      <div className={styles.counters}>
+        <div>Created Tasks: { counter.add}</div>
+        <div>Updated Tasks: { counter.up}</div>
+        <div>Deleted Tasks: {counter.del}</div>
+      </div>
       <div className={styles.counters}>
         <div>Created Tasks: {countTask.createdTask}</div>
         <div>Updated Tasks: {countTask.updatedTask}</div>

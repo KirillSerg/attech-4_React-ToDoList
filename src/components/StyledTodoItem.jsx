@@ -6,7 +6,7 @@ import StyledInputTask from "./StyledInputTask";
 const StyledTask = styled(StyledInputTask)`
     margin: 0;
     background-color: ${props => props.isCompleted ? 'green' : props.color};
-    color: ${({isCompleted}) => isCompleted ? 'black' : 'blue'};
+    color: black;
     text-decoration: ${({isCompleted}) => isCompleted ? 'line-through' : 'none'};
     opacity: ${({isCompleted}) => isCompleted ? '0.5' : 'none'};
 `
