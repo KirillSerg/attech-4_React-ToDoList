@@ -9,47 +9,17 @@ import TaskRow from './components/TaskRow'
 
 const App = () => {
   const counter = useSelector(state => state.countReducer)
+  const list = useSelector(state => state.todoReducer.list)
   const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //   getLocal()
-  // }, []);
-
-  // useEffect(() => {
-  //   saveLocal()
-  // }, [task, countTask]);
-
-
-  // const saveLocal = () => {
-  //   localStorage.setItem("task", JSON.stringify(task));
-  //   localStorage.setItem("countTask", JSON.stringify(countTask));
-  //   localStorage.setItem("count", JSON.stringify(counter));
-  // }
-
-  // const getLocal = () => {
-  //   if (localStorage.getItem("task") === null) {
-  //     getDataTask()
-  //     localStorage.setItem("task", JSON.stringify([]));
-  //   } else {
-  //     let taskLocal = JSON.parse(localStorage.getItem("task"));
-  //     setTask(taskLocal)
-  //   }
-
-  //   if (localStorage.getItem("countTask") === null) {
-  //     localStorage.setItem("countTask", JSON.stringify([]));
-  //   } else {
-  //     let counterLocal = JSON.parse(localStorage.getItem("countTask"));
-  //     setCountTask(counterLocal)
-  //   }
-  // }
+  if (list.length === 0 && counter.add === 0 && counter.del === 0 && counter.up === 0) {
+    getDataTask()
+  }
 
   function getDataTask() {
     return fetch('https://gist.githubusercontent.com/alexandrtovmach/0c8a29b734075864727228c559fe9f96/raw/c4e4133c9658af4c4b3474475273b23b4a70b4af/todo-task.json')
       .then(response => response.json())
       .then(json => dispatch(downloadTodoList((json.map(todo => ({ ...todo, color: getRandomColor(), redactOn: false}))).sort((a, b) => a.isCompleted - b.isCompleted))))
-        
-        
-        //setTask(json.map(todo => ({ ...todo, color: getRandomColor() })).sort((a, b) => a.isCompleted - b.isCompleted)))
   }
 
   return (
