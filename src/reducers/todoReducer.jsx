@@ -17,7 +17,7 @@ const todoReducer = (state = defaultState, action) => {
                         createdAt: new Date().toLocaleDateString('en-US'),
                         redactOn: false
                     }
-                ] 
+                ].sort((a, b) => a.isCompleted - b.isCompleted)
             }
         case "DELETE_TODO":
             return { ...state, list: state.list.filter(todo => todo.id !== action.payload) }
