@@ -32,7 +32,6 @@ const App = () => {
         <div>Updated Tasks: { counter.up}</div>
         <div>Deleted Tasks: {counter.del}</div>
       </div>
-      <button  onClick={getDataTask}>Download ToDo list</button>
       <button style={{color: "green"}} onClick={() => dispatch(setActivForm(true))}>ADD TODO</button>
       <Form />
       <TaskRow />
