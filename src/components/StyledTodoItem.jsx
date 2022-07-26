@@ -1,6 +1,5 @@
 import React from "react";
 import styled from 'styled-components';
-
 import StyledInputTask from "./StyledInputTask";
 
 const StyledTask = styled(StyledInputTask)`

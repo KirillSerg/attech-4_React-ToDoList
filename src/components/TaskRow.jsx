@@ -1,47 +1,52 @@
 import React, { useState } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {deleteTodo, editTodo, saveEditTodo, complitTodo} from "../actions"
 
 import StyledTodoItem from "./StyledTodoItem";
 
-const TaskRow = ({ text, id, task, setTask, isCompleted, setCountTask, countTask, color }) => {
-    const [redactOn, setRedactOn] = useState(true)
+const TaskRow = () => {
     const [redactTextTask, setRedactTextTask] = useState('')
-    
+    const list = useSelector((state) => state.todoReducer.list)
     const dispatch = useDispatch()
 
-    const deleteTaskRowHandler = () => {
-        setCountTask({deletedTask: countTask.deletedTask + 1, createdTask: countTask.createdTask, updatedTask: countTask.updatedTask})
-        setTask(task.filter(todo => todo.id !== id));
-        dispatch({ type: "DELETE"})
+    const redactItemTextHandler = (e) => {
+        setRedactTextTask(e.target.value)
+    }
+    
+    const deleteTaskRowHandler = (id) => {
+        dispatch(deleteTodo(id))
+        dispatch({ type: "DELETE_COUNT"})
+    }
+    
+    const editButtonHendler = (id) => {
+        dispatch(editTodo(id))
     }
 
-    const redactButtonHendler = () => {
-        setRedactOn(!redactOn)
-    }
-
-    const saveButtonHendler = () => {
-        setRedactOn(!redactOn)
-        setTask(task.map(todo => (todo.id !== id) ? todo : { id: todo.id, text: redactTextTask, isCompleted: todo.isCompleted, createdAt: todo.createdAt, color: todo.color}))
-        setCountTask({ deletedTask: countTask.deletedTask, createdTask: countTask.createdTask, updatedTask: countTask.updatedTask + 1 });
+    const saveButtonHendler = (text, id) => {
+        dispatch(saveEditTodo(text, id))
         dispatch({ type: "UPDATE"})
     }
 
-    const redactItemTaskHandler = (e) => {
-        setRedactTextTask(e.target.value)
-    }
 
-    const complitItemTaskHandler = () => {
-        setTask(task.map(todo => (todo.id !== id) ? todo : { id: todo.id, text: todo.text, isCompleted: !todo.isCompleted, createdAt: todo.createdAt, })
-            .sort((a, b) => a.isCompleted - b.isCompleted))
+    const complitItemTaskHandler = (id) => {
+        dispatch(complitTodo(id))
     }
+    
 
     return (
-        <div className='wrap'>
-            <input type="checkbox" checked={isCompleted} onChange={complitItemTaskHandler} />
-            <StyledTodoItem isCompleted={isCompleted} color={ color} type="text" disabled={redactOn} defaultValue={text} onChange={redactItemTaskHandler} />
-            <button style={{ margin: "0 0 0 5px" }} onClick={deleteTaskRowHandler}>del</button>
-            <button style={{ margin: "0 0 0 5px" }} hidden={!redactOn} onClick={redactButtonHendler}>redact</button>
-            <button style={{ margin: "0 0 0 5px" }} hidden={redactOn} onClick={saveButtonHendler}>save</button>
+        <div className="todo-container">
+            {
+                list.map((todo) => {
+                    return (
+                        <div style={{ display: "flex"}} key={todo.id}>
+                            <input type="checkbox" checked={todo.isCompleted} onChange={() => complitItemTaskHandler(todo.id)} />
+                            <StyledTodoItem isCompleted={todo.isCompleted} color={ todo.color} type="text" disabled={!todo.redactOn} defaultValue={todo.text} onChange={redactItemTextHandler} />
+                            <button style={{ margin: "0 0 0 5px" }} onClick={() => deleteTaskRowHandler(todo.id)}>del</button>
+                            <button style={{ margin: "0 0 0 5px" }} hidden={todo.redactOn} onClick={() => editButtonHendler(todo.id)}>edit</button>
+                            <button style={{ margin: "0 0 0 5px" }} hidden={!todo.redactOn} onClick={() => saveButtonHendler(redactTextTask, todo.id)}>save</button>
+                        </div>)
+                })
+            }
         </div>
     )
 }
