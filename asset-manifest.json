@@ -1,15 +1,13 @@
 {
   "files": {
-    "main.css": "/attech-4_React-ToDoList/static/css/main.83124906.css",
-    "main.js": "/attech-4_React-ToDoList/static/js/main.cb7190c7.js",
-    "static/js/175.7430bd77.chunk.js": "/attech-4_React-ToDoList/static/js/175.7430bd77.chunk.js",
+    "main.css": "/attech-4_React-ToDoList/static/css/main.087fea5c.css",
+    "main.js": "/attech-4_React-ToDoList/static/js/main.b466e35c.js",
     "index.html": "/attech-4_React-ToDoList/index.html",
-    "main.83124906.css.map": "/attech-4_React-ToDoList/static/css/main.83124906.css.map",
-    "main.cb7190c7.js.map": "/attech-4_React-ToDoList/static/js/main.cb7190c7.js.map",
-    "175.7430bd77.chunk.js.map": "/attech-4_React-ToDoList/static/js/175.7430bd77.chunk.js.map"
+    "main.087fea5c.css.map": "/attech-4_React-ToDoList/static/css/main.087fea5c.css.map",
+    "main.b466e35c.js.map": "/attech-4_React-ToDoList/static/js/main.b466e35c.js.map"
   },
   "entrypoints": [
-    "static/css/main.83124906.css",
-    "static/js/main.cb7190c7.js"
+    "static/css/main.087fea5c.css",
+    "static/js/main.b466e35c.js"
   ]
 }
