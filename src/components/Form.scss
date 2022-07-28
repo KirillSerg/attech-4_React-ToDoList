@@ -11,6 +11,7 @@
     opacity: 0;
     pointer-events: none;
     transition: 0.5s;
+    z-index: 1;
 }
 
 .modal__bg.activ{
@@ -19,8 +20,9 @@
 }
 
 .modal__conteiner{
-    padding: 25px;
-    border-radius: 12px;
+    box-shadow: rgba(0,0,0,0.35) 0px 5px 15px;
+    padding: 0 25px 25px 25px;
+    border-radius: 8px;
     background-color: #fff;
     transform: scale(0.5);
     transition: 0.4s all;
@@ -33,7 +35,31 @@
     transform: scale(1);
 }
 
+.close_btn_wrap {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin: 5px 0 30px 0;
+}
+
+.footer{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    width: 100%;
+}
+
 .add_todo_btn{
-    margin-top: 10px;
-    width: 25%;
+    width: max-content;
+    background-color: rgb(103, 103, 238);
+    border: none;
+    border-radius: 3px;
+}
+
+.close_todo_btn2{
+    width:max-content;
+    background-color: red;
+    border: none;
+    border-radius: 3px;
 }

@@ -12,11 +12,13 @@ const Form = () => {
     const dispatch = useDispatch()
 
     const submitSetTask = (e) => {
-        dispatch(addTodo(taskText))
-        dispatch({ type: "ADD_COUNT" })
-        dispatch(setActivForm(false))
-        setTaskText('')
-        e.preventDefault();
+        if (e.charCode === 13 || e.type === "click") {
+            dispatch(addTodo(taskText))
+            dispatch({ type: "ADD_COUNT" })
+            dispatch(setActivForm(false))
+            setTaskText('')
+            e.preventDefault();
+        }
     }
 
     const addTextHandler = (e) => {
@@ -26,8 +28,14 @@ const Form = () => {
     return (
         <div className={activForm ? "modal__bg activ" : "modal__bg"} onClick={() => dispatch(setActivForm(false))}>
             <div className={activForm ? "modal__conteiner activ" : "modal__conteiner"} onClick={e => e.stopPropagation()}>
-                <StyledInputTask type="text" onChange={addTextHandler} placeholder="enter your ToDo" value={taskText} />
-                <button className="add_todo_btn" type="submit" onClick={submitSetTask}> Submit </button>
+                <div className="close_btn_wrap">
+                    <button type="submit" onClick={() => dispatch(setActivForm(false))}> x </button>
+                </div>
+                <StyledInputTask autofocus onKeyPress={submitSetTask}type="text" onChange={addTextHandler} placeholder="enter your ToDo" value={taskText} />
+                <div className="footer">
+                    <button className="add_todo_btn" type="submit" onClick={submitSetTask}> Submit</button>
+                    <button className="close_todo_btn2" type="submit" onClick={() => dispatch(setActivForm(false))}> Cancel </button>
+                </div>
             </div>
         </div>
     )
