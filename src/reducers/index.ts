@@ -10,3 +10,5 @@ const allReducers = combineReducers({
 })
 
 export default allReducers
+
+export type AllReducersState = ReturnType<typeof allReducers> 
