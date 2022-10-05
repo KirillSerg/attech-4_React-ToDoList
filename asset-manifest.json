@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/attech-4_React-ToDoList/static/css/main.39ada51c.css",
-    "main.js": "/attech-4_React-ToDoList/static/js/main.57b3fec0.js",
+    "main.css": "/attech-4_React-ToDoList/static/css/main.36962e38.css",
+    "main.js": "/attech-4_React-ToDoList/static/js/main.862b48a3.js",
+    "static/media/leone-venter-VieM9BdZKFo-unsplash.jpg": "/attech-4_React-ToDoList/static/media/leone-venter-VieM9BdZKFo-unsplash.986238f09d4aa17231fc.jpg",
     "index.html": "/attech-4_React-ToDoList/index.html",
-    "main.39ada51c.css.map": "/attech-4_React-ToDoList/static/css/main.39ada51c.css.map",
-    "main.57b3fec0.js.map": "/attech-4_React-ToDoList/static/js/main.57b3fec0.js.map"
+    "main.36962e38.css.map": "/attech-4_React-ToDoList/static/css/main.36962e38.css.map",
+    "main.862b48a3.js.map": "/attech-4_React-ToDoList/static/js/main.862b48a3.js.map"
   },
   "entrypoints": [
-    "static/css/main.39ada51c.css",
-    "static/js/main.57b3fec0.js"
+    "static/css/main.36962e38.css",
+    "static/js/main.862b48a3.js"
   ]
 }
