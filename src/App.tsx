@@ -48,18 +48,16 @@ const App: React.FC = () => {
 
   return (
     <div className="app">
-      {/*className={styles.App} */}
       <header>
         <h1>You must do this!!</h1>
       </header>
       <div className="counters">
-        {/*className={styles.counters} */}
-        <div>Created Tasks: {add}</div>
-        <div>Updated Tasks: {up}</div>
-        <div>Deleted Tasks: {del}</div>
+        <div>Created Tasks: <b>{add}</b></div>
+        <div>Updated Tasks: <b>{up}</b></div>
+        <div>Deleted Tasks: <b>{del}</b></div>
       </div>
       <button
-        style={{ color: "green" }}
+        style={{ padding: "5px", fontWeight: "bold", borderRadius: "15px", backgroundColor: "lightgreen" }}
         onClick={() => dispatch(setActivForm(true))}
       >
         ADD TODO

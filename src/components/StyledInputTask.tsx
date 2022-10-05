@@ -3,7 +3,7 @@ import styled from "styled-components";
 type Xxx = {
     //props?: any,
     onKeyPress?: any,
-    onChange?: any,
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void,
     type?: string,
     placeholder?: string,
     value?: string,
